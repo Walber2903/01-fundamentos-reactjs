@@ -1,25 +1,80 @@
-import { useState } from 'react'
 import { Header } from './components/Header'
-import { Post } from './Post'
+import { Post } from './components/Post'
+
+import './global.css'
+import styles from './App.module.css'
+import { Sidebar } from './components/Sidebar'
+
+const posts = [
+  {
+    id: 1,
+    author: {
+      avatarUrl: 'https://github.com/Walber2903.png',
+      name: 'Walber Araujo',
+      role: 'Fullstack Developer'
+    },
+    content: [
+      {
+        type: 'paragraph',
+        content: 'Fala galeraa 👋'
+      },
+      {
+        type: 'paragraph',
+        content: 'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀'
+      },
+      {
+        type: 'link',
+        content: 'jane.design/doctorcare'
+      }   
+    ],
+    publishedAt: new Date('2022-06-28 00:13:33'),
+  },
+  {
+    id: 2,
+    author: {
+      avatarUrl: 'https://github.com/diego3g.png',
+      name: 'Diego Fernandes',
+      role: 'CTO @Rocketseat'
+    },
+    content: [
+      {
+        type: 'paragraph',
+        content: 'Fala galeraa 👋'
+      },
+      {
+        type: 'paragraph',
+        content: 'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀'
+      },
+      {
+        type: 'link',
+        content: 'jane.design/doctorcare'
+      }   
+    ],
+    publishedAt: new Date('2022-07-01 10:22:30'),
+  },
+];
 
 export function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <div>
-
-      <h1>Hello World</h1>
-
       <Header />
 
-      <Post 
-        author = "Walber Araujo"
-        content = "NAOSIFNAIBIFnsfnabsoifaBAF"
-      />
-      <Post 
-        author = "Enzo Henrique"
-        content = "NAOSIFNAIBIFnsfnabsoifaBAF"
-      />
+      <div className={styles.wrapper}>
+      <aside>
+        <Sidebar />
+      </aside>
+        <main>
+          {posts.map(post => {
+            return <Post
+              key={post.id}
+              author={post.author}
+              content={post.content}
+              publishedAt={post.publishedAt}
+            />
+          })}
+        </main>
+
+      </div>
 
     </div>
   )
